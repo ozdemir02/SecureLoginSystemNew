@@ -5,7 +5,8 @@ Note: Database will become deactivated in 3 months.
 
 Project is build using Microsoft Views Controller (MVC).
 
-Packages used.
+
+Packages used:
 
 EFC (Entity Framework Core).
 
