@@ -1,0 +1,15 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = Model.StatusCode.HasValue ? $"Error {Model.StatusCode}" : "Error";
+}
+
+<h1 class="text-danger">@Model.ErrorMessage</h1>
+<h2>Request ID: <code>@Model.RequestId</code></h2>
+
+@if (Model.IsAdmin && !string.IsNullOrEmpty(Model.ExceptionMessage))
+{
+    <div class="alert alert-warning mt-4">
+        <h3>Debug Information (Admin Only)</h3>
+        <pre>@Model.ExceptionMessage</pre>
+    </div>
+}

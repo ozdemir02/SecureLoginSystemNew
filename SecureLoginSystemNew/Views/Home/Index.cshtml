@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Velkommen</h1>
+    <p>Du bedes oprette en konto, eller logge ind på din eksisterende konto.</p>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        var isTwoFactorEnabled = User.HasClaim("TwoFactorEnabled", "true");
+
+        <div class="alert alert-success mt-4">
+            Du er logget ind som <strong>@User.Identity.Name</strong>
+        </div>
+
+        <div class="mt-4">
+            @if (isTwoFactorEnabled) // check om 2fa er aktiveret
+            {
+                <div class="alert alert-info mb-3">
+                    Two-factor authentication er allerede aktiveret
+                </div>
+                <a asp-controller="Account" asp-action="DisableTwoFactor" class="btn btn-warning">Deaktiver 2FA</a>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="EnableTwoFactor" class="btn btn-secondary">Aktiver 2FA (QR)</a>
+            }
+        </div>
+        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+            @Html.AntiForgeryToken()
+            <button style="margin-top: 10px;" type="submit" class="btn btn-danger">Log ud</button>
+        </form>
+    }
+    else
+    {
+        <div class="mt-4">
+            <a asp-controller="Account" asp-action="Login" class="btn btn-primary mr-2">Login</a>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-secondary">Opret Bruger</a>
+        </div>
+    }
+</div>

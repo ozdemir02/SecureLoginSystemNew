@@ -1,0 +1,25 @@
+﻿@using System.Security.Claims
+@{
+    var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+}
+
+<ul class="navbar-nav">
+    @if (isAuthenticated)
+    {
+        <li class="nav-item">
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="nav-link btn btn-link">Log ud</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Opret Bruger</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Log Ind</a>
+        </li>
+    }
+</ul>

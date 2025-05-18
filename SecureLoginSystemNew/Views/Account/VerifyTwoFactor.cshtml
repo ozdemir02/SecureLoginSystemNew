@@ -1,0 +1,16 @@
+﻿@model VerifyTwoFactorViewModel
+
+<h2>Indtast din 2FA-kode</h2>
+
+<form asp-action="VerifyTwoFactor" method="post">
+    <div class="form-group">
+        <label>Kode fra Google Authenticator:</label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+    <button style="margin-top: 10px;" type="submit" class="btn btn-primary">Verificer</button>
+</form>
+
+<div class="mt-2" style="margin-top: 5px;">
+    <a asp-controller="Account" asp-action="Login" class="btn btn-primary mr-2">Tilbage til Log Ind</a>
+</div>
